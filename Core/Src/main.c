@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -39,6 +39,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+SMBUS_HandleTypeDef hsmbus2;
 
 /* USER CODE BEGIN PV */
 
@@ -47,6 +48,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_I2C2_SMBUS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -84,6 +86,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_I2C2_SMBUS_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -94,10 +97,19 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-
     /* USER CODE BEGIN 3 */
-	  //hal_toggle()
-	  //Daley
+    /*
+
+
+    tedsttstst
+    tedsttstst
+    tedsttstst
+
+    tedsttstst
+    tedsttstst
+
+    */
+   
   }
   /* USER CODE END 3 */
 }
@@ -144,6 +156,48 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_SMBUS_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hsmbus2.Instance = I2C2;
+  hsmbus2.Init.ClockSpeed = 100000;
+  hsmbus2.Init.OwnAddress1 = 0;
+  hsmbus2.Init.AddressingMode = SMBUS_ADDRESSINGMODE_7BIT;
+  hsmbus2.Init.DualAddressMode = SMBUS_DUALADDRESS_DISABLE;
+  hsmbus2.Init.OwnAddress2 = 0;
+  hsmbus2.Init.GeneralCallMode = SMBUS_GENERALCALL_DISABLE;
+  hsmbus2.Init.NoStretchMode = SMBUS_NOSTRETCH_DISABLE;
+  hsmbus2.Init.PacketErrorCheckMode = SMBUS_PEC_DISABLE;
+  hsmbus2.Init.PeripheralMode = SMBUS_PERIPHERAL_MODE_SMBUS_SLAVE;
+  if (HAL_SMBUS_Init(&hsmbus2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** configuration Alert Mode
+  */
+  if (HAL_SMBUS_EnableAlert_IT(&hsmbus2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -154,6 +208,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
