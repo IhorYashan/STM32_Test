@@ -65,6 +65,18 @@ static void MX_I2C2_SMBUS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	tedsttstst
+	    tedsttstst
+	    tedsttstst
+
+	    tedsttstst
+	    tedsttstst
+		tedsttstst
+		    tedsttstst
+		    tedsttstst
+
+		    tedsttstst
+		    tedsttstst
 
   /* USER CODE END 1 */
 
@@ -98,17 +110,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    /*
 
-
-    tedsttstst
-    tedsttstst
-    tedsttstst
-
-    tedsttstst
-    tedsttstst
-
-    */
    
   }
   /* USER CODE END 3 */
